@@ -172,10 +172,11 @@ class MyPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         JSON size= new JSON();
+        String file="C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
         super.paintComponent(g);
         for (PuzzlePiece piece : puzzlePieces) {
             try {
-                g.drawImage(piece.img, piece.location.getX(), piece.location.getY(), (int) this.getSize().getWidth() / size.widthReader("C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json"), (int) this.getSize().getHeight() /size.heightReader("C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json"), null);
+                g.drawImage(piece.img, piece.location.getX(), piece.location.getY(), (int) this.getSize().getWidth() / size.widthReader(file), (int) this.getSize().getHeight() /size.heightReader(file), null);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -271,6 +272,7 @@ class JSON {
 }
 
 public class Main {
+    static int fps=10;
     public static void main(String[] args) throws IOException {
         JFrame frame = new JFrame();
         JSON json=new JSON();
@@ -308,7 +310,7 @@ public class Main {
         frame.setVisible(true);
         while (true) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(fps);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
