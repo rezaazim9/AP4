@@ -1,5 +1,4 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -350,12 +349,11 @@ public class Main {
 //        }
         for (int i = 0; i < piecesRandomOrder.size(); i++) {
             if (panel.missingPiece != i) {
-                puzzlePieces.add(new PuzzlePiece(images.get(piecesRandomOrder.get(i) ) , new Location(panel.getHeight() / json.widthReader(file) * (i % json.widthReader(file)), panel.getWidth() / json.heightReader(file) * (i /json.widthReader(file)))));
+                puzzlePieces.add(new PuzzlePiece(images.get(piecesRandomOrder.get(i)) , new Location(panel.getHeight() / json.widthReader(file) * (i % json.widthReader(file)), panel.getWidth() / json.heightReader(file) * (i /json.widthReader(file)))));
             } else {
                 puzzlePieces.add(new PuzzlePiece("missing.jpg", new Location(panel.getHeight() / json.widthReader(file) * (i % json.widthReader(file)), panel.getWidth() / json.heightReader(file) * (i /json.widthReader(file)))));
             }
         }
-
         panel.setPuzzlePieces(puzzlePieces);
         frame.addKeyListener(new MyKeyListener());
         frame.setVisible(true);
