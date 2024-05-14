@@ -91,16 +91,14 @@ class PuzzlePiece {
     JSON json=new JSON();
     String file="C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
     public Image img;
-    protected int pieceNumber;
+    protected int pieceNumber=json.heightReader(file)* json.widthReader(file)-1;
     Location location;
-
     public PuzzlePiece(String imageName) throws IOException {
         try {
             img = ImageIO.read(new File("src/assets/" + imageName));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        pieceNumber = json.heightReader(file)* json.widthReader(file)-1;
         if (!imageName.equals("missing.jpg")) {
             pieceNumber = Integer.parseInt(imageName.substring(0, imageName.indexOf('.'))) - 1;
         }
@@ -111,7 +109,7 @@ class PuzzlePiece {
         this.location = location;
     }
 
-    public PuzzlePiece(Image img, Location location, int pieceIdentifier) {
+    public PuzzlePiece(Image img, Location location, int pieceIdentifier) throws IOException {
         this.img = img;
         this.location = location;
         this.pieceNumber = pieceIdentifier;
@@ -125,7 +123,7 @@ class PuzzlePiece {
         this.img = img;
     }
 
-    public PuzzlePiece getClone() {
+    public PuzzlePiece getClone() throws IOException {
         return new PuzzlePiece(img, location, pieceNumber);
     }
 }
