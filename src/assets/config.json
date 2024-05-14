@@ -13,7 +13,7 @@
     10,
     11,
     13,
-    13,
+    12,
     14,
     15
   ],
@@ -36,5 +36,5 @@
     "missing.jpg"
   ],
   "widthTiles": 4,
-  "heightTiles":3
+  "heightTiles":4
 }

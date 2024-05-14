@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +9,7 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 class Board {
     public int widthTiles;
@@ -186,6 +188,7 @@ class MyPanel extends JPanel {
 
 
 class MyKeyListener implements KeyListener {
+    boolean diameter=true;
     JSON json=new JSON();
     String file="C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
     @Override
@@ -195,6 +198,52 @@ class MyKeyListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         int missingPieceIndex = MyPanel.getInstance().missingPiece;
+        if (diameter){
+            if (keyEvent.getKeyCode()==keyEvent.VK_Q){
+                try {
+                    if (missingPieceIndex % json.widthReader(file) != 0&&missingPieceIndex > json.widthReader(file)-1){
+                        MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex - json.widthReader(file)-1);
+                        MyPanel.getInstance().setMissingPiece(missingPieceIndex - json.widthReader(file)-1);
+
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (keyEvent.getKeyCode()==keyEvent.VK_W){
+                try {
+                    if (missingPieceIndex > json.widthReader(file)-1&&missingPieceIndex % json.widthReader(file) != json.widthReader(file)-1){
+                        MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex - json.widthReader(file)+1);
+                        MyPanel.getInstance().setMissingPiece(missingPieceIndex - json.widthReader(file)+1);
+
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (keyEvent.getKeyCode()==keyEvent.VK_A){
+                try {
+                    if (missingPieceIndex % json.widthReader(file) != 0&&missingPieceIndex < json.widthReader(file)*(json.heightReader(file)-1)){
+                        MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex + json.widthReader(file)-1);
+                        MyPanel.getInstance().setMissingPiece(missingPieceIndex + json.widthReader(file)-1);
+
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (keyEvent.getKeyCode()==keyEvent.VK_S){
+                try {
+                    if (missingPieceIndex % json.widthReader(file) != json.widthReader(file)-1&&missingPieceIndex < json.widthReader(file)*(json.heightReader(file)-1)){
+                        MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex + json.widthReader(file)+1);
+                        MyPanel.getInstance().setMissingPiece(missingPieceIndex + json.widthReader(file)+1);
+
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
         if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
             try {
                 if (missingPieceIndex % json.widthReader(file) != json.widthReader(file)-1) {
@@ -291,6 +340,7 @@ public class Main {
         ArrayList<PuzzlePiece> puzzlePieces = new ArrayList<>();
         ArrayList<Integer> piecesRandomOrder = new JSON().orderReader("C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json");
        ArrayList<String> images = new JSON().imageReader("C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json");
+        Collections.shuffle(piecesRandomOrder);
         for (int i = 0; i < piecesRandomOrder.size(); i++)
             if (piecesRandomOrder.get(i) +1== json.heightReader(file)* json.widthReader(file))
                 panel.setMissingPiece(i);
@@ -305,6 +355,7 @@ public class Main {
                 puzzlePieces.add(new PuzzlePiece("missing.jpg", new Location(panel.getHeight() / json.widthReader(file) * (i % json.widthReader(file)), panel.getWidth() / json.heightReader(file) * (i /json.widthReader(file)))));
             }
         }
+
         panel.setPuzzlePieces(puzzlePieces);
         frame.addKeyListener(new MyKeyListener());
         frame.setVisible(true);
