@@ -341,10 +341,10 @@ public class Main {
         for (int i = 0; i < piecesRandomOrder.size(); i++)
             if (piecesRandomOrder.get(i) +1== json.heightReader(file)* json.widthReader(file))
                 panel.setMissingPiece(i);
-//        if (!solvable(panel.missingPiece, piecesRandomOrder)) {
-//            JOptionPane.showMessageDialog(frame, "this puzzle is not solvable, change your config and try again", "Puzzle not solvable", JOptionPane.WARNING_MESSAGE);
-//            gameFinished = true;
-//        }
+        if (!solvable(panel.missingPiece, piecesRandomOrder)&&json.heightReader(file)==3&&json.widthReader(file)==3) {
+            JOptionPane.showMessageDialog(frame, "this puzzle is not solvable, change your config and try again", "Puzzle not solvable", JOptionPane.WARNING_MESSAGE);
+            gameFinished = true;
+        }
         for (int i = 0; i < piecesRandomOrder.size(); i++) {
             if (panel.missingPiece != i) {
                 puzzlePieces.add(new PuzzlePiece(images.get(piecesRandomOrder.get(i)) , new Location(panel.getHeight() / json.widthReader(file) * (i % json.widthReader(file)), panel.getWidth() / json.heightReader(file) * (i /json.widthReader(file)))));
