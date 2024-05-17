@@ -11,11 +11,7 @@
     8,
     9,
     10,
-    11,
-    12,
-    13,
-    14,
-    15
+    11
   ],
   "list2": [
     "1.png",
@@ -36,5 +32,5 @@
     "missing.jpg"
   ],
   "widthTiles": 4,
-  "heightTiles":4
+  "heightTiles":3
 }
