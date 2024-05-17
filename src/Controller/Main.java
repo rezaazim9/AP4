@@ -15,10 +15,10 @@ import java.util.Collections;
 
 public class Main {
     static int fps = 10;
+    static boolean cli = true;
 
     public static void main(String[] args) throws IOException {
         JFrame frame = new JFrame();
-        JSON json = new JSON();
         String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
         MyPanel panel = MyPanel.getInstance();
         boolean gameFinished = false;
@@ -36,17 +36,17 @@ public class Main {
         ArrayList<String> images = new JSON().imageReader("C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json");
         Collections.shuffle(piecesRandomOrder);
         for (int i = 0; i < piecesRandomOrder.size(); i++)
-            if (piecesRandomOrder.get(i) + 1 == json.heightReader(file) * json.widthReader(file))
+            if (piecesRandomOrder.get(i) + 1 == JSON.getJson().heightReader(file) * JSON.getJson().widthReader(file))
                 panel.setMissingPiece(i);
-        if (!solvable(panel.missingPiece, piecesRandomOrder) && json.heightReader(file) == 3 && json.widthReader(file) == 3 && !MyKeyListener.diameter) {
+        if (!solvable(panel.getMissingPiece(), piecesRandomOrder) && JSON.getJson().heightReader(file) == 3 && JSON.getJson().widthReader(file) == 3 && !MyKeyListener.diameter) {
             JOptionPane.showMessageDialog(frame, "this puzzle is not solvable, change your config and try again", "Puzzle not solvable", JOptionPane.WARNING_MESSAGE);
             gameFinished = true;
         }
         for (int i = 0; i < piecesRandomOrder.size(); i++) {
-            if (panel.missingPiece != i) {
-                puzzlePieces.add(new PuzzlePiece(images.get(piecesRandomOrder.get(i)), new Location(panel.getHeight() / json.widthReader(file) * (i % json.widthReader(file)), panel.getWidth() / json.heightReader(file) * (i / json.widthReader(file)))));
+            if (panel.getMissingPiece() != i) {
+                puzzlePieces.add(new PuzzlePiece(images.get(piecesRandomOrder.get(i)), new Location(panel.getHeight() / JSON.getJson().widthReader(file) * (i % JSON.getJson().widthReader(file)), panel.getWidth() / JSON.getJson().heightReader(file) * (i / JSON.getJson().widthReader(file)))));
             } else {
-                puzzlePieces.add(new PuzzlePiece("missing.jpg", new Location(panel.getHeight() / json.widthReader(file) * (i % json.widthReader(file)), panel.getWidth() / json.heightReader(file) * (i / json.widthReader(file)))));
+                puzzlePieces.add(new PuzzlePiece("missing.jpg", new Location(panel.getHeight() / JSON.getJson().widthReader(file) * (i % JSON.getJson().widthReader(file)), panel.getWidth() / JSON.getJson().heightReader(file) * (i / JSON.getJson().widthReader(file)))));
             }
         }
         panel.setPuzzlePieces(puzzlePieces);
@@ -63,7 +63,7 @@ public class Main {
             if (gameFinished) {
                 break;
             }
-            if (panel.gameState.equals("finished")) {
+            if (panel.getPuzzlePieces().equals("finished")) {
                 JOptionPane.showMessageDialog(frame, "You finished the game, congratulation", "Game Finished", JOptionPane.INFORMATION_MESSAGE);
                 gameFinished = true;
             }

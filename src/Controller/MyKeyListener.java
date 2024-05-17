@@ -1,14 +1,16 @@
 package Controller;
 
+import Model.PuzzlePiece;
+import View.CLI;
 import View.MyPanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.ConcurrentModificationException;
 
 class MyKeyListener implements KeyListener {
     static boolean diameter = true;
-    JSON json = new JSON();
     String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
 
     @Override
@@ -17,13 +19,13 @@ class MyKeyListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        int missingPieceIndex = MyPanel.getInstance().missingPiece;
+        int missingPieceIndex = MyPanel.getInstance().getMissingPiece();
         if (diameter) {
             if (keyEvent.getKeyCode() == keyEvent.VK_Q) {
                 try {
-                    if (missingPieceIndex % json.widthReader(file) != 0 && missingPieceIndex > json.widthReader(file) - 1) {
-                        MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex - json.widthReader(file) - 1);
-                        MyPanel.getInstance().setMissingPiece(missingPieceIndex - json.widthReader(file) - 1);
+                    if (missingPieceIndex % JSON.getJson().widthReader(file) != 0 && missingPieceIndex > JSON.getJson().widthReader(file) - 1) {
+                        MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex - JSON.getJson().widthReader(file) - 1);
+                        MyPanel.getInstance().setMissingPiece(missingPieceIndex - JSON.getJson().widthReader(file) - 1);
 
                     }
                 } catch (IOException e) {
@@ -32,9 +34,9 @@ class MyKeyListener implements KeyListener {
             }
             if (keyEvent.getKeyCode() == keyEvent.VK_W) {
                 try {
-                    if (missingPieceIndex > json.widthReader(file) - 1 && missingPieceIndex % json.widthReader(file) != json.widthReader(file) - 1) {
-                        MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex - json.widthReader(file) + 1);
-                        MyPanel.getInstance().setMissingPiece(missingPieceIndex - json.widthReader(file) + 1);
+                    if (missingPieceIndex > JSON.getJson().widthReader(file) - 1 && missingPieceIndex % JSON.getJson().widthReader(file) != JSON.getJson().widthReader(file) - 1) {
+                        MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex - JSON.getJson().widthReader(file) + 1);
+                        MyPanel.getInstance().setMissingPiece(missingPieceIndex - JSON.getJson().widthReader(file) + 1);
 
                     }
                 } catch (IOException e) {
@@ -43,9 +45,9 @@ class MyKeyListener implements KeyListener {
             }
             if (keyEvent.getKeyCode() == keyEvent.VK_A) {
                 try {
-                    if (missingPieceIndex % json.widthReader(file) != 0 && missingPieceIndex < json.widthReader(file) * (json.heightReader(file) - 1)) {
-                        MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex + json.widthReader(file) - 1);
-                        MyPanel.getInstance().setMissingPiece(missingPieceIndex + json.widthReader(file) - 1);
+                    if (missingPieceIndex % JSON.getJson().widthReader(file) != 0 && missingPieceIndex < JSON.getJson().widthReader(file) * (JSON.getJson().heightReader(file) - 1)) {
+                        MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex + JSON.getJson().widthReader(file) - 1);
+                        MyPanel.getInstance().setMissingPiece(missingPieceIndex + JSON.getJson().widthReader(file) - 1);
 
                     }
                 } catch (IOException e) {
@@ -54,9 +56,9 @@ class MyKeyListener implements KeyListener {
             }
             if (keyEvent.getKeyCode() == keyEvent.VK_S) {
                 try {
-                    if (missingPieceIndex % json.widthReader(file) != json.widthReader(file) - 1 && missingPieceIndex < json.widthReader(file) * (json.heightReader(file) - 1)) {
-                        MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex + json.widthReader(file) + 1);
-                        MyPanel.getInstance().setMissingPiece(missingPieceIndex + json.widthReader(file) + 1);
+                    if (missingPieceIndex % JSON.getJson().widthReader(file) != JSON.getJson().widthReader(file) - 1 && missingPieceIndex < JSON.getJson().widthReader(file) * (JSON.getJson().heightReader(file) - 1)) {
+                        MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex + JSON.getJson().widthReader(file) + 1);
+                        MyPanel.getInstance().setMissingPiece(missingPieceIndex + JSON.getJson().widthReader(file) + 1);
 
                     }
                 } catch (IOException e) {
@@ -66,7 +68,7 @@ class MyKeyListener implements KeyListener {
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
             try {
-                if (missingPieceIndex % json.widthReader(file) != json.widthReader(file) - 1) {
+                if (missingPieceIndex % JSON.getJson().widthReader(file) != JSON.getJson().widthReader(file) - 1) {
                     MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex + 1);
                     MyPanel.getInstance().setMissingPiece(missingPieceIndex + 1);
                 }
@@ -75,7 +77,7 @@ class MyKeyListener implements KeyListener {
             }
         } else if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
             try {
-                if (missingPieceIndex % json.widthReader(file) != 0) {
+                if (missingPieceIndex % JSON.getJson().widthReader(file) != 0) {
                     MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex - 1);
                     MyPanel.getInstance().setMissingPiece(missingPieceIndex - 1);
                 }
@@ -84,19 +86,26 @@ class MyKeyListener implements KeyListener {
             }
         } else if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
             try {
-                if (missingPieceIndex > json.widthReader(file) - 1) {
-                    MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex - json.widthReader(file));
-                    MyPanel.getInstance().setMissingPiece(missingPieceIndex - json.widthReader(file));
+                if (missingPieceIndex > JSON.getJson().widthReader(file) - 1) {
+                    MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex - JSON.getJson().widthReader(file));
+                    MyPanel.getInstance().setMissingPiece(missingPieceIndex - JSON.getJson().widthReader(file));
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         } else if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
             try {
-                if (missingPieceIndex < json.widthReader(file) * (json.heightReader(file) - 1)) {
-                    MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex + json.widthReader(file));
-                    MyPanel.getInstance().setMissingPiece(missingPieceIndex + json.widthReader(file));
+                if (missingPieceIndex < JSON.getJson().widthReader(file) * (JSON.getJson().heightReader(file) - 1)) {
+                    MyPanel.getInstance().swapPieces(missingPieceIndex, missingPieceIndex + JSON.getJson().widthReader(file));
+                    MyPanel.getInstance().setMissingPiece(missingPieceIndex + JSON.getJson().widthReader(file));
                 }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (Main.cli) {
+            try {
+                CLI.cliBoard();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

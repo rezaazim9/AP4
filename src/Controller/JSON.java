@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Board;
+import View.MyPanel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -8,23 +9,32 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class JSON {
+    static JSON json;
+
+    public static JSON getJson() {
+        if (json == null) {
+            json = new JSON();
+        }
+        return json;
+    }
+
     public ArrayList<Integer> orderReader(String source) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Board order = objectMapper.readValue(new File(source), Board.class);
-        return order.list;
+        return order.getList();
     }
 
     public int heightReader(String source) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Board order = objectMapper.readValue(new File(source), Board.class);
-        return order.heightTiles;
+        return order.getHeightTiles();
 
     }
 
     public int widthReader(String source) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Board order = objectMapper.readValue(new File(source), Board.class);
-        return order.widthTiles;
+        return order.getWidthTiles();
 
     }
 
@@ -37,7 +47,7 @@ public class JSON {
     public ArrayList<String> imageReader(String source) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Board order = objectMapper.readValue(new File(source), Board.class);
-        return order.list2;
+        return order.getList2();
     }
 
 }
