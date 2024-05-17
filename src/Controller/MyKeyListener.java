@@ -1,16 +1,15 @@
 package Controller;
 
-import Model.PuzzlePiece;
 import View.CLI;
 import View.MyPanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.util.ConcurrentModificationException;
+
+import static Controller.Main.diameter;
 
 class MyKeyListener implements KeyListener {
-    static boolean diameter = true;
     String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
 
     @Override
