@@ -11,20 +11,20 @@ public class JSON {
     public ArrayList<Integer> orderReader(String source) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Board order = objectMapper.readValue(new File(source), Board.class);
-        return order.list;
+        return order.getList();
     }
 
     public int heightReader(String source) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Board order = objectMapper.readValue(new File(source), Board.class);
-        return order.heightTiles;
+        return order.getHeightTiles();
 
     }
 
     public int widthReader(String source) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Board order = objectMapper.readValue(new File(source), Board.class);
-        return order.widthTiles;
+        return order.getWidthTiles();
 
     }
 
@@ -37,7 +37,7 @@ public class JSON {
     public ArrayList<String> imageReader(String source) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Board order = objectMapper.readValue(new File(source), Board.class);
-        return order.list2;
+        return order.getList2();
     }
 
 }

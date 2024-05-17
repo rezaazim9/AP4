@@ -8,11 +8,45 @@ import java.io.File;
 import java.io.IOException;
 
 public class PuzzlePiece {
-    JSON json = new JSON();
-    String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
-    public Image img;
-    public int pieceNumber = json.heightReader(file) * json.widthReader(file) - 1;
-    public Location location;
+    private JSON json = new JSON();
+    private final String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
+    private Image img;
+   private int pieceNumber = json.heightReader(file) * json.widthReader(file) - 1;
+
+    public JSON getJson() {
+        return json;
+    }
+
+    public void setJson(JSON json) {
+        this.json = json;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+
+    public Image getImg() {
+        return img;
+    }
+
+    public void setImg(Image img) {
+        this.img = img;
+    }
+
+    public int getPieceNumber() {
+        return pieceNumber;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    private Location location;
 
     public PuzzlePiece(String imageName) throws IOException {
         try {

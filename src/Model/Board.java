@@ -3,10 +3,10 @@ package Model;
 import java.util.ArrayList;
 
 public class Board {
-    public int widthTiles;
-    public int heightTiles;
-    public ArrayList<Integer> list = new ArrayList<>();
-    public ArrayList<String> list2 = new ArrayList<>();
+    private int widthTiles;
+    private int heightTiles;
+    private ArrayList<Integer> list = new ArrayList<>();
+    private ArrayList<String> list2 = new ArrayList<>();
 
     public Board(ArrayList<Integer> list, ArrayList<String> list2, int widthTiles, int heightTiles) {
         this.list = list;

@@ -38,12 +38,12 @@ public class Main {
         for (int i = 0; i < piecesRandomOrder.size(); i++)
             if (piecesRandomOrder.get(i) + 1 == json.heightReader(file) * json.widthReader(file))
                 panel.setMissingPiece(i);
-        if (!solvable(panel.missingPiece, piecesRandomOrder) && json.heightReader(file) == 3 && json.widthReader(file) == 3 && !MyKeyListener.diameter) {
+        if (!solvable(panel.getMissingPiece(), piecesRandomOrder) && json.heightReader(file) == 3 && json.widthReader(file) == 3 && !MyKeyListener.diameter) {
             JOptionPane.showMessageDialog(frame, "this puzzle is not solvable, change your config and try again", "Puzzle not solvable", JOptionPane.WARNING_MESSAGE);
             gameFinished = true;
         }
         for (int i = 0; i < piecesRandomOrder.size(); i++) {
-            if (panel.missingPiece != i) {
+            if (panel.getMissingPiece() != i) {
                 puzzlePieces.add(new PuzzlePiece(images.get(piecesRandomOrder.get(i)), new Location(panel.getHeight() / json.widthReader(file) * (i % json.widthReader(file)), panel.getWidth() / json.heightReader(file) * (i / json.widthReader(file)))));
             } else {
                 puzzlePieces.add(new PuzzlePiece("missing.jpg", new Location(panel.getHeight() / json.widthReader(file) * (i % json.widthReader(file)), panel.getWidth() / json.heightReader(file) * (i / json.widthReader(file)))));
@@ -63,7 +63,7 @@ public class Main {
             if (gameFinished) {
                 break;
             }
-            if (panel.gameState.equals("finished")) {
+            if (panel.getGameState().equals("finished")) {
                 JOptionPane.showMessageDialog(frame, "You finished the game, congratulation", "Game Finished", JOptionPane.INFORMATION_MESSAGE);
                 gameFinished = true;
             }

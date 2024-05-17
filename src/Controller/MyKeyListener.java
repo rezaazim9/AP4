@@ -17,7 +17,7 @@ class MyKeyListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        int missingPieceIndex = MyPanel.getInstance().missingPiece;
+        int missingPieceIndex = MyPanel.getInstance().getMissingPiece();
         if (diameter) {
             if (keyEvent.getKeyCode() == keyEvent.VK_Q) {
                 try {
