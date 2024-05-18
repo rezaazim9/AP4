@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 public class Menu implements ActionListener {
-     public JFrame frame = new JFrame();
+    public JFrame frame = new JFrame();
     JButton GUI = new JButton("GUI");
     JButton CLI = new JButton("CLI");
     JButton DIA = new JButton("Diameter");
@@ -53,7 +53,16 @@ public class Menu implements ActionListener {
         }
         if (e.getSource() == CLI) {
             frame.dispose();
-            new CLI();
+
+            Main.cli = true;
+            try {
+                if (!Main.solvable(Main.panel.getMissingPiece(), Main.piecesRandomOrder) && !Main.diameter && JSON.getJson().heightReader(Main.file) == JSON.getJson().widthReader(Main.file)) {
+                    JOptionPane.showMessageDialog(frame, "this puzzle is not solvable, change your config and try again", "Puzzle not solvable", JOptionPane.WARNING_MESSAGE);
+                    System.exit(0);
+                }
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         if (e.getSource() == DIA) {
             Main.diameter = true;

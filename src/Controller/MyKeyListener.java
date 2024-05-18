@@ -102,13 +102,6 @@ class MyKeyListener implements KeyListener {
                 throw new RuntimeException(e);
             }
         }
-        if (Main.cli) {
-            try {
-                CLI.cliBoard();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
     @Override

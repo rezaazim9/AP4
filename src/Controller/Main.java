@@ -18,13 +18,13 @@ import java.util.Collections;
 public class Main {
 
     static int fps = 10;
-    static boolean cli = true;
+    public static boolean cli = false;
     public static boolean diameter = false;
     public static JFrame frame = new JFrame();
     public static boolean gameFinished = false;
-   public static MyPanel panel = MyPanel.getInstance();
-   public static String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
-   public static ArrayList<Integer> piecesRandomOrder;
+    public static MyPanel panel = MyPanel.getInstance();
+    public static String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
+    public static ArrayList<Integer> piecesRandomOrder;
 
     static {
         try {
@@ -38,6 +38,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+        int missingPoint = 0;
         int maxSize = Math.max(screenWidth, screenHeight) / 3;
         panel.setSize(maxSize, maxSize);
         panel.setLocation(screenWidth / 2 - maxSize / 2, screenHeight / 2 - maxSize / 2);
@@ -61,11 +62,13 @@ public class Main {
         }
         panel.setPuzzlePieces(puzzlePieces);
         frame.addKeyListener(new MyKeyListener());
-        if (cli) {
-            CLI.cliBoard();
-        }
         new Menu();
         while (true) {
+            if (cli) {
+
+                CLI.cliBoard();
+                CLIScanner.setNewBoard(piecesRandomOrder);
+            }
             try {
                 Thread.sleep(fps);
             } catch (InterruptedException e) {
@@ -76,12 +79,11 @@ public class Main {
             if (gameFinished) {
                 break;
             }
-            if (panel.getGameState().equals("finished")) {
+            if (panel.getGameState().equals("finished") || CLI.gameFinished(piecesRandomOrder)) {
                 JOptionPane.showMessageDialog(frame, "You finished the game, congratulation", "Game Finished", JOptionPane.INFORMATION_MESSAGE);
                 gameFinished = true;
             }
         }
-
     }
 
     public static boolean solvable(int missingPiece, ArrayList<Integer> piecesOrder) {
