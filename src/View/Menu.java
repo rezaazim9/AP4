@@ -1,5 +1,6 @@
 package View;
 
+import Controller.JSON;
 import Controller.Main;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+
 
 public class Menu implements ActionListener {
      public JFrame frame = new JFrame();
@@ -39,8 +41,15 @@ public class Menu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == GUI) {
             frame.dispose();
-
-
+            Main.frame.setVisible(true);
+            try {
+                if (!Main.solvable(Main.panel.getMissingPiece(), Main.piecesRandomOrder) && !Main.diameter && JSON.getJson().heightReader(Main.file) == JSON.getJson().widthReader(Main.file)) {
+                    JOptionPane.showMessageDialog(frame, "this puzzle is not solvable, change your config and try again", "Puzzle not solvable", JOptionPane.WARNING_MESSAGE);
+                    Main.gameFinished = true;
+                }
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         if (e.getSource() == CLI) {
             frame.dispose();
