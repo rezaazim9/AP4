@@ -2,19 +2,18 @@ package View;
 
 import Controller.JSON;
 import Controller.Main;
-import Model.PuzzlePiece;
+import Model.Variables;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class CLI {
     public static void cliBoard() throws IOException {
-        String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
         int count = 0;
         for (Integer i : Main.piecesRandomOrder) {
             System.out.print(i + 1 + " ");
             count++;
-            if (count == JSON.getJson().widthReader(file)) {
+            if (count == JSON.getJson().widthReader(Variables.getFile())) {
                 System.out.println();
                 count = 0;
             }

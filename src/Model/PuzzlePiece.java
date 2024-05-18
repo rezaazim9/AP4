@@ -9,14 +9,8 @@ import java.io.IOException;
 
 public class PuzzlePiece {
 
-    private final String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
     private Image img;
-    private int pieceNumber = JSON.getJson().heightReader(file) * JSON.getJson().widthReader(file) - 1;
-
-
-    public String getFile() {
-        return file;
-    }
+    private int pieceNumber = JSON.getJson().heightReader(Variables.getFile()) * JSON.getJson().widthReader(Variables.getFile()) - 1;
 
 
     public Image getImg() {

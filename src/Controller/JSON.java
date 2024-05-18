@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Board;
-import View.MyPanel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;

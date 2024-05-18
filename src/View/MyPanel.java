@@ -2,6 +2,7 @@ package View;
 
 import Controller.JSON;
 import Model.PuzzlePiece;
+import Model.Variables;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MyPanel extends JPanel {
-    private static MyPanel panelInstance;
     private ArrayList<PuzzlePiece> puzzlePieces = new ArrayList<>();
+    private int missingPiece = 0;
+    private String gameState = "#";
+    private static MyPanel panelInstance;
 
     public String getGameState() {
         return gameState;
@@ -36,10 +39,6 @@ public class MyPanel extends JPanel {
         return missingPiece;
     }
 
-    private int missingPiece = 0;
-    private String gameState = "#";
-
-    String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
 
     public static MyPanel getInstance() {
         if (panelInstance == null) {
@@ -60,7 +59,7 @@ public class MyPanel extends JPanel {
     }
 
     public boolean gameFinished() throws IOException {
-        for (int i = 0; i < JSON.getJson().heightReader(file) * JSON.getJson().widthReader(file); i++) {
+        for (int i = 0; i < JSON.getJson().heightReader(Variables.getFile()) * JSON.getJson().widthReader(Variables.getFile()); i++) {
             int pieceIdentifier = puzzlePieces.get(i).getPieceNumber();
             if (pieceIdentifier != i) {
                 return false;
@@ -80,11 +79,10 @@ public class MyPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         JSON size = new JSON();
-        String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
         super.paintComponent(g);
         for (PuzzlePiece piece : puzzlePieces) {
             try {
-                g.drawImage(piece.getImg(), piece.getLocation().getX(), piece.getLocation().getY(), (int) this.getSize().getWidth() / size.widthReader(file), (int) this.getSize().getHeight() / size.heightReader(file), null);
+                g.drawImage(piece.getImg(), piece.getLocation().getX(), piece.getLocation().getY(), (int) this.getSize().getWidth() / size.widthReader(Variables.getFile()), (int) this.getSize().getHeight() / size.heightReader(Variables.getFile()), null);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
