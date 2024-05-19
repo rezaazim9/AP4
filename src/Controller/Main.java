@@ -19,7 +19,6 @@ import java.util.Collections;
 public class Main {
 
 
-
     static {
         try {
             Variables.setPiecesRandomOrder(new JSON().orderReader("C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json"));
@@ -40,7 +39,7 @@ public class Main {
         Variables.getFrame().add(Variables.getPanel());
         Variables.getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         ArrayList<PuzzlePiece> puzzlePieces = new ArrayList<>();
-        ArrayList<String> images = new JSON().imageReader("C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json");
+        ArrayList<String> images = new JSON().imageReader(Variables.getFile());
         Collections.shuffle(Variables.getPiecesRandomOrder());
         for (int i = 0; i < Variables.getPiecesRandomOrder().size(); i++) {
             if (Variables.getPiecesRandomOrder().get(i) + 1 == JSON.getJson().heightReader(Variables.getFile()) * JSON.getJson().widthReader(Variables.getFile())) {
@@ -48,10 +47,10 @@ public class Main {
             }
         }
         for (int i = 0; i < Variables.getPiecesRandomOrder().size(); i++) {
-            if ( Variables.getPanel().getMissingPiece() != i) {
-                puzzlePieces.add(new PuzzlePiece(images.get(Variables.getPiecesRandomOrder().get(i)), new Location( Variables.getPanel().getHeight() / JSON.getJson().widthReader(Variables.getFile()) * (i % JSON.getJson().widthReader(Variables.getFile())),  Variables.getPanel().getWidth() / JSON.getJson().heightReader(Variables.getFile())* (i / JSON.getJson().widthReader(Variables.getFile())))));
+            if (Variables.getPanel().getMissingPiece() != i) {
+                puzzlePieces.add(new PuzzlePiece(images.get(Variables.getPiecesRandomOrder().get(i)), new Location(Variables.getPanel().getHeight() / JSON.getJson().widthReader(Variables.getFile()) * (i % JSON.getJson().widthReader(Variables.getFile())), Variables.getPanel().getWidth() / JSON.getJson().heightReader(Variables.getFile()) * (i / JSON.getJson().widthReader(Variables.getFile())))));
             } else {
-                puzzlePieces.add(new PuzzlePiece("missing.jpg", new Location( Variables.getPanel().getHeight() / JSON.getJson().widthReader(Variables.getFile()) * (i % JSON.getJson().widthReader(Variables.getFile())),  Variables.getPanel().getWidth() / JSON.getJson().heightReader(Variables.getFile()) * (i / JSON.getJson().widthReader(Variables.getFile())))));
+                puzzlePieces.add(new PuzzlePiece("missing.jpg", new Location(Variables.getPanel().getHeight() / JSON.getJson().widthReader(Variables.getFile()) * (i % JSON.getJson().widthReader(Variables.getFile())), Variables.getPanel().getWidth() / JSON.getJson().heightReader(Variables.getFile()) * (i / JSON.getJson().widthReader(Variables.getFile())))));
             }
         }
         Variables.getPanel().setPuzzlePieces(puzzlePieces);
@@ -69,11 +68,11 @@ public class Main {
                 e.printStackTrace();
             }
             Variables.getPanel().repaint();
-           Variables.getFrame().repaint();
+            Variables.getFrame().repaint();
             if (Variables.isGameFinished()) {
                 break;
             }
-            if ( Variables.getPanel().getGameState().equals("finished") || CLI.gameFinished(Variables.getPiecesRandomOrder())) {
+            if (Variables.getPanel().getGameState().equals("finished") || CLI.gameFinished(Variables.getPiecesRandomOrder())) {
                 JOptionPane.showMessageDialog(Variables.getFrame(), "You finished the game, congratulation", "Game Finished", JOptionPane.INFORMATION_MESSAGE);
                 Variables.setGameFinished(true);
             }

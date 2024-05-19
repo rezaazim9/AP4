@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-
 public class Menu implements ActionListener {
     public JFrame frame = new JFrame();
     JButton GUI = new JButton("GUI");
@@ -45,7 +44,7 @@ public class Menu implements ActionListener {
             try {
                 if (!Main.solvable(Variables.getPanel().getMissingPiece(), Variables.getPiecesRandomOrder()) && !Variables.isDiameter() && JSON.getJson().heightReader(Variables.getFile()) == JSON.getJson().widthReader(Variables.getFile())) {
                     JOptionPane.showMessageDialog(frame, "this puzzle is not solvable, change your config and try again", "Puzzle not solvable", JOptionPane.WARNING_MESSAGE);
-                   Variables.setGameFinished(true);
+                    Variables.setGameFinished(true);
                 }
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -56,7 +55,7 @@ public class Menu implements ActionListener {
 
             Variables.setDiameter(true);
             try {
-                if (!Main.solvable(Variables.getPanel().getMissingPiece(), Variables.getPiecesRandomOrder()) && !Variables.isDiameter()&& JSON.getJson().heightReader(Variables.getFile()) == JSON.getJson().widthReader(Variables.getFile())) {
+                if (!Main.solvable(Variables.getPanel().getMissingPiece(), Variables.getPiecesRandomOrder()) && !Variables.isDiameter() && JSON.getJson().heightReader(Variables.getFile()) == JSON.getJson().widthReader(Variables.getFile())) {
                     JOptionPane.showMessageDialog(frame, "this puzzle is not solvable, change your config and try again", "Puzzle not solvable", JOptionPane.WARNING_MESSAGE);
                     System.exit(0);
                 }
@@ -65,7 +64,7 @@ public class Menu implements ActionListener {
             }
         }
         if (e.getSource() == DIA) {
-           Variables.setDiameter(true);
+            Variables.setDiameter(true);
         }
         if (e.getSource() == nonDIA) {
             Variables.setDiameter(false);
