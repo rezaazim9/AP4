@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
-import static Controller.Main.diameter;
+
 
 class MyKeyListener implements KeyListener {
     @Override
@@ -17,7 +17,8 @@ class MyKeyListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         int missingPieceIndex = MyPanel.getInstance().getMissingPiece();
-        if (diameter) {
+        if (Variables.isDiameter()
+        ) {
             if (keyEvent.getKeyCode() == keyEvent.VK_Q) {
                 try {
                     if (missingPieceIndex % JSON.getJson().widthReader(Variables.getFile()) != 0 && missingPieceIndex > JSON.getJson().widthReader(Variables.getFile()) - 1) {

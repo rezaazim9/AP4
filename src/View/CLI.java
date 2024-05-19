@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class CLI {
     public static void cliBoard() throws IOException {
         int count = 0;
-        for (Integer i : Main.piecesRandomOrder) {
+        for (Integer i : Variables.getPiecesRandomOrder()) {
             System.out.print(i + 1 + " ");
             count++;
             if (count == JSON.getJson().widthReader(Variables.getFile())) {

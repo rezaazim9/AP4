@@ -2,6 +2,7 @@ package View;
 
 import Controller.JSON;
 import Controller.Main;
+import Model.Variables;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -40,11 +41,11 @@ public class Menu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == GUI) {
             frame.dispose();
-            Main.frame.setVisible(true);
+            Variables.getFrame().setVisible(true);
             try {
-                if (!Main.solvable(Main.panel.getMissingPiece(), Main.piecesRandomOrder) && !Main.diameter && JSON.getJson().heightReader(Main.file) == JSON.getJson().widthReader(Main.file)) {
+                if (!Main.solvable(Variables.getPanel().getMissingPiece(), Variables.getPiecesRandomOrder()) && !Variables.isDiameter() && JSON.getJson().heightReader(Variables.getFile()) == JSON.getJson().widthReader(Variables.getFile())) {
                     JOptionPane.showMessageDialog(frame, "this puzzle is not solvable, change your config and try again", "Puzzle not solvable", JOptionPane.WARNING_MESSAGE);
-                    Main.gameFinished = true;
+                   Variables.setGameFinished(true);
                 }
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -53,9 +54,9 @@ public class Menu implements ActionListener {
         if (e.getSource() == CLI) {
             frame.dispose();
 
-            Main.cli = true;
+            Variables.setDiameter(true);
             try {
-                if (!Main.solvable(Main.panel.getMissingPiece(), Main.piecesRandomOrder) && !Main.diameter && JSON.getJson().heightReader(Main.file) == JSON.getJson().widthReader(Main.file)) {
+                if (!Main.solvable(Variables.getPanel().getMissingPiece(), Variables.getPiecesRandomOrder()) && !Variables.isDiameter()&& JSON.getJson().heightReader(Variables.getFile()) == JSON.getJson().widthReader(Variables.getFile())) {
                     JOptionPane.showMessageDialog(frame, "this puzzle is not solvable, change your config and try again", "Puzzle not solvable", JOptionPane.WARNING_MESSAGE);
                     System.exit(0);
                 }
@@ -64,10 +65,10 @@ public class Menu implements ActionListener {
             }
         }
         if (e.getSource() == DIA) {
-            Main.diameter = true;
+           Variables.setDiameter(true);
         }
         if (e.getSource() == nonDIA) {
-            Main.diameter = false;
+            Variables.setDiameter(false);
         }
     }
 }

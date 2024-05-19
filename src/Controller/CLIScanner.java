@@ -38,7 +38,7 @@ public class CLIScanner {
             list.set(missingPoint, list.get(missingPoint + 1));
             list.set(missingPoint + 1, save);
         }
-        if (Main.diameter) {
+        if (Variables.isDiameter()) {
             if (choice.equals("q") && missingPoint >= JSON.getJson().widthReader(Variables.getFile()) && missingPoint % JSON.getJson().widthReader(Variables.getFile())!= 0) {
                 save = list.get(missingPoint);
                 list.set(missingPoint, list.get(missingPoint - JSON.getJson().widthReader(Variables.getFile())- 1));
