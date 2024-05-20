@@ -10,7 +10,7 @@ import java.io.IOException;
 public class PuzzlePiece {
 
     private Image img;
-    private int pieceNumber = JSON.getJson().heightReader(Variables.getFile()) * JSON.getJson().widthReader(Variables.getFile()) - 1;
+    private int pieceNumber = JSON.getJson().heightReader( Variables.variable.getFile()) * JSON.getJson().widthReader( Variables.variable.getFile()) - 1;
 
 
     public Image getImg() {

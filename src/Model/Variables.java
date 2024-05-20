@@ -6,76 +6,77 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Variables {
-    private static String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
-    private static int fps = 10;
-    private static boolean cli = false;
-    private static boolean diameter = false;
-    private static JFrame frame = new JFrame();
-    private static boolean gameFinished = false;
-    private static MyPanel panel = MyPanel.getInstance();
-    private static ArrayList<Integer> piecesRandomOrder;
+    public  static Variables variable=new Variables();
+    private  String file = "C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json";
+    private  int fps = 10;
+    private  boolean cli = false;
+    private  boolean diameter = false;
+    private  JFrame frame = new JFrame();
+    private  boolean gameFinished = false;
+    private  MyPanel panel = MyPanel.getInstance();
+    private ArrayList<Integer> piecesRandomOrder;
 
-    public static int getFps() {
+    public  int getFps() {
         return fps;
     }
 
-    public static void setFps(int fps) {
-        Variables.fps = fps;
+    public  void setFps(int fps) {
+        variable.fps = fps;
     }
 
-    public static boolean isCli() {
+    public boolean isCli() {
         return cli;
     }
 
-    public static void setCli(boolean cli) {
-        Variables.cli = cli;
+    public  void setCli(boolean cli) {
+        variable.cli = cli;
     }
 
-    public static boolean isDiameter() {
+    public  boolean isDiameter() {
         return diameter;
     }
 
-    public static void setDiameter(boolean diameter) {
-        Variables.diameter = diameter;
+    public void setDiameter(boolean diameter) {
+        variable.diameter = diameter;
     }
 
-    public static JFrame getFrame() {
+    public   JFrame getFrame() {
         return frame;
     }
 
-    public static void setFrame(JFrame frame) {
-        Variables.frame = frame;
+    public   void setFrame(JFrame frame) {
+        variable.frame = frame;
     }
 
-    public static boolean isGameFinished() {
+    public   boolean isGameFinished() {
         return gameFinished;
     }
 
-    public static void setGameFinished(boolean gameFinished) {
-        Variables.gameFinished = gameFinished;
+    public   void setGameFinished(boolean gameFinished) {
+        variable.gameFinished = gameFinished;
     }
 
-    public static MyPanel getPanel() {
+    public   MyPanel getPanel() {
         return panel;
     }
 
-    public static void setPanel(MyPanel panel) {
-        Variables.panel = panel;
+    public   void setPanel(MyPanel panel) {
+        variable.panel = panel;
     }
 
-    public static ArrayList<Integer> getPiecesRandomOrder() {
+    public   ArrayList<Integer> getPiecesRandomOrder() {
         return piecesRandomOrder;
     }
 
-    public static void setPiecesRandomOrder(ArrayList<Integer> piecesRandomOrder) {
-        Variables.piecesRandomOrder = piecesRandomOrder;
+    public   void setPiecesRandomOrder(ArrayList<Integer> piecesRandomOrder) {
+        variable.piecesRandomOrder = piecesRandomOrder;
     }
 
-    public static String getFile() {
+    public   String getFile() {
         return file;
     }
 
-    public static void setFile(String file) {
-        Variables.file = file;
+    public   void setFile(String file) {
+        variable.file = file;
     }
 }

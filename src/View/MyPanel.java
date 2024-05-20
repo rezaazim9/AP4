@@ -59,7 +59,7 @@ public class MyPanel extends JPanel {
     }
 
     public boolean gameFinished() throws IOException {
-        for (int i = 0; i < JSON.getJson().heightReader(Variables.getFile()) * JSON.getJson().widthReader(Variables.getFile()); i++) {
+        for (int i = 0; i < JSON.getJson().heightReader( Variables.variable.getFile()) * JSON.getJson().widthReader( Variables.variable.getFile()); i++) {
             int pieceIdentifier = puzzlePieces.get(i).getPieceNumber();
             if (pieceIdentifier != i) {
                 return false;
@@ -82,7 +82,7 @@ public class MyPanel extends JPanel {
         super.paintComponent(g);
         for (PuzzlePiece piece : puzzlePieces) {
             try {
-                g.drawImage(piece.getImg(), piece.getLocation().getX(), piece.getLocation().getY(), (int) this.getSize().getWidth() / size.widthReader(Variables.getFile()), (int) this.getSize().getHeight() / size.heightReader(Variables.getFile()), null);
+                g.drawImage(piece.getImg(), piece.getLocation().getX(), piece.getLocation().getY(), (int) this.getSize().getWidth() / size.widthReader( Variables.variable.getFile()), (int) this.getSize().getHeight() / size.heightReader( Variables.variable.getFile()), null);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

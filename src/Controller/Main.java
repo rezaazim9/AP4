@@ -17,64 +17,60 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Main {
-
-
     static {
         try {
-            Variables.setPiecesRandomOrder(new JSON().orderReader("C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json"));
+             Variables.variable.setPiecesRandomOrder(new JSON().orderReader("C:\\Users\\ostad\\IdeaProjects\\AP4\\src\\assets\\config.json"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-
     public static void main(String[] args) throws IOException {
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         int maxSize = Math.max(screenWidth, screenHeight) / 3;
-        Variables.getPanel().setSize(maxSize, maxSize);
-        Variables.getPanel().setLocation(screenWidth / 2 - maxSize / 2, screenHeight / 2 - maxSize / 2);
-        Variables.getFrame().setSize(Variables.getPanel().getSize());
-        Variables.getFrame().setLocation(Variables.getPanel().getLocation());
-        Variables.getFrame().add(Variables.getPanel());
-        Variables.getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+         Variables.variable.getPanel().setSize(maxSize, maxSize);
+         Variables.variable.getPanel().setLocation(screenWidth / 2 - maxSize / 2, screenHeight / 2 - maxSize / 2);
+         Variables.variable.getFrame().setSize( Variables.variable.getPanel().getSize());
+         Variables.variable.getFrame().setLocation( Variables.variable.getPanel().getLocation());
+         Variables.variable.getFrame().add( Variables.variable.getPanel());
+         Variables.variable.getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         ArrayList<PuzzlePiece> puzzlePieces = new ArrayList<>();
-        ArrayList<String> images = new JSON().imageReader(Variables.getFile());
-        Collections.shuffle(Variables.getPiecesRandomOrder());
-        for (int i = 0; i < Variables.getPiecesRandomOrder().size(); i++) {
-            if (Variables.getPiecesRandomOrder().get(i) + 1 == JSON.getJson().heightReader(Variables.getFile()) * JSON.getJson().widthReader(Variables.getFile())) {
-                Variables.getPanel().setMissingPiece(i);
+        ArrayList<String> images = new JSON().imageReader( Variables.variable.getFile());
+        Collections.shuffle(  Variables.variable.variable.getPiecesRandomOrder());
+        for (int i = 0; i <  Variables.variable.getPiecesRandomOrder().size(); i++) {
+            if ( Variables.variable.getPiecesRandomOrder().get(i) + 1 == JSON.getJson().heightReader( Variables.variable.getFile()) * JSON.getJson().widthReader( Variables.variable.getFile())) {
+                 Variables.variable.getPanel().setMissingPiece(i);
             }
         }
-        for (int i = 0; i < Variables.getPiecesRandomOrder().size(); i++) {
-            if (Variables.getPanel().getMissingPiece() != i) {
-                puzzlePieces.add(new PuzzlePiece(images.get(Variables.getPiecesRandomOrder().get(i)), new Location(Variables.getPanel().getHeight() / JSON.getJson().widthReader(Variables.getFile()) * (i % JSON.getJson().widthReader(Variables.getFile())), Variables.getPanel().getWidth() / JSON.getJson().heightReader(Variables.getFile()) * (i / JSON.getJson().widthReader(Variables.getFile())))));
+        for (int i = 0; i <  Variables.variable.getPiecesRandomOrder().size(); i++) {
+            if ( Variables.variable.getPanel().getMissingPiece() != i) {
+                puzzlePieces.add(new PuzzlePiece(images.get( Variables.variable.getPiecesRandomOrder().get(i)), new Location( Variables.variable.getPanel().getHeight() / JSON.getJson().widthReader( Variables.variable.getFile()) * (i % JSON.getJson().widthReader( Variables.variable.getFile())),  Variables.variable.getPanel().getWidth() / JSON.getJson().heightReader( Variables.variable.getFile()) * (i / JSON.getJson().widthReader( Variables.variable.getFile())))));
             } else {
-                puzzlePieces.add(new PuzzlePiece("missing.jpg", new Location(Variables.getPanel().getHeight() / JSON.getJson().widthReader(Variables.getFile()) * (i % JSON.getJson().widthReader(Variables.getFile())), Variables.getPanel().getWidth() / JSON.getJson().heightReader(Variables.getFile()) * (i / JSON.getJson().widthReader(Variables.getFile())))));
+                puzzlePieces.add(new PuzzlePiece("missing.jpg", new Location( Variables.variable.getPanel().getHeight() / JSON.getJson().widthReader( Variables.variable.getFile()) * (i % JSON.getJson().widthReader( Variables.variable.getFile())),  Variables.variable.getPanel().getWidth() / JSON.getJson().heightReader( Variables.variable.getFile()) * (i / JSON.getJson().widthReader( Variables.variable.getFile())))));
             }
         }
-        Variables.getPanel().setPuzzlePieces(puzzlePieces);
-        Variables.getFrame().addKeyListener(new MyKeyListener());
+         Variables.variable.getPanel().setPuzzlePieces(puzzlePieces);
+         Variables.variable.getFrame().addKeyListener(new MyKeyListener());
         new Menu();
         while (true) {
-            if (Variables.isCli()) {
+            if ( Variables.variable.isCli()) {
 
                 CLI.cliBoard();
-                CLIScanner.setNewBoard(Variables.getPiecesRandomOrder());
+                CLIScanner.setNewBoard( Variables.variable.getPiecesRandomOrder());
             }
             try {
-                Thread.sleep(Variables.getFps());
+                Thread.sleep( Variables.variable.getFps());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Variables.getPanel().repaint();
-            Variables.getFrame().repaint();
-            if (Variables.isGameFinished()) {
+             Variables.variable.getPanel().repaint();
+             Variables.variable.getFrame().repaint();
+            if ( Variables.variable.isGameFinished()) {
                 break;
             }
-            if (Variables.getPanel().getGameState().equals("finished") || CLI.gameFinished(Variables.getPiecesRandomOrder())) {
-                JOptionPane.showMessageDialog(Variables.getFrame(), "You finished the game, congratulation", "Game Finished", JOptionPane.INFORMATION_MESSAGE);
-                Variables.setGameFinished(true);
+            if ( Variables.variable.getPanel().getGameState().equals("finished") || CLI.gameFinished( Variables.variable.getPiecesRandomOrder())) {
+                JOptionPane.showMessageDialog( Variables.variable.getFrame(), "You finished the game, congratulation", "Game Finished", JOptionPane.INFORMATION_MESSAGE);
+                 Variables.variable.setGameFinished(true);
             }
         }
     }

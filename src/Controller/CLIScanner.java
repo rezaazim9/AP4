@@ -14,50 +14,50 @@ public class CLIScanner {
         int save;
         int missingPoint = 0;
         for (Integer i : list) {
-            if (JSON.getJson().heightReader(Variables.getFile()) * JSON.getJson().widthReader(Variables.getFile()) - 1 == i) {
+            if (JSON.getJson().heightReader( Variables.variable.getFile()) * JSON.getJson().widthReader( Variables.variable.getFile()) - 1 == i) {
                 missingPoint = list.indexOf(i);
             }
         }
-        if (choice.equals("u") && missingPoint >= JSON.getJson().widthReader(Variables.getFile())) {
+        if (choice.equals("u") && missingPoint >= JSON.getJson().widthReader( Variables.variable.getFile())) {
             save = list.get(missingPoint);
-            list.set(missingPoint, list.get(missingPoint - JSON.getJson().widthReader(Variables.getFile())));
-            list.set(missingPoint - JSON.getJson().widthReader(Variables.getFile()), save);
+            list.set(missingPoint, list.get(missingPoint - JSON.getJson().widthReader( Variables.variable.getFile())));
+            list.set(missingPoint - JSON.getJson().widthReader( Variables.variable.getFile()), save);
         }
-        if (choice.equals("d") && missingPoint < JSON.getJson().widthReader(Variables.getFile()) * (JSON.json.heightReader(Variables.getFile())- 1)) {
+        if (choice.equals("d") && missingPoint < JSON.getJson().widthReader( Variables.variable.getFile()) * (JSON.json.heightReader( Variables.variable.getFile())- 1)) {
             save = list.get(missingPoint);
-            list.set(missingPoint, list.get(missingPoint + JSON.getJson().widthReader(Variables.getFile())));
-            list.set(missingPoint + JSON.getJson().widthReader(Variables.getFile()), save);
+            list.set(missingPoint, list.get(missingPoint + JSON.getJson().widthReader( Variables.variable.getFile())));
+            list.set(missingPoint + JSON.getJson().widthReader( Variables.variable.getFile()), save);
         }
-        if (choice.equals("l") && missingPoint % JSON.getJson().widthReader(Variables.getFile()) != 0) {
+        if (choice.equals("l") && missingPoint % JSON.getJson().widthReader( Variables.variable.getFile()) != 0) {
             save = list.get(missingPoint);
             list.set(missingPoint, list.get(missingPoint - 1));
             list.set(missingPoint - 1, save);
         }
-        if (choice.equals("r") && missingPoint % JSON.getJson().widthReader(Variables.getFile()) != JSON.getJson().widthReader(Variables.getFile()) - 1) {
+        if (choice.equals("r") && missingPoint % JSON.getJson().widthReader( Variables.variable.getFile()) != JSON.getJson().widthReader( Variables.variable.getFile()) - 1) {
             save = list.get(missingPoint);
             list.set(missingPoint, list.get(missingPoint + 1));
             list.set(missingPoint + 1, save);
         }
-        if (Variables.isDiameter()) {
-            if (choice.equals("q") && missingPoint >= JSON.getJson().widthReader(Variables.getFile()) && missingPoint % JSON.getJson().widthReader(Variables.getFile())!= 0) {
+        if ( Variables.variable.isDiameter()) {
+            if (choice.equals("q") && missingPoint >= JSON.getJson().widthReader( Variables.variable.getFile()) && missingPoint % JSON.getJson().widthReader( Variables.variable.getFile())!= 0) {
                 save = list.get(missingPoint);
-                list.set(missingPoint, list.get(missingPoint - JSON.getJson().widthReader(Variables.getFile())- 1));
-                list.set(missingPoint - JSON.getJson().widthReader(Variables.getFile())- 1, save);
+                list.set(missingPoint, list.get(missingPoint - JSON.getJson().widthReader( Variables.variable.getFile())- 1));
+                list.set(missingPoint - JSON.getJson().widthReader( Variables.variable.getFile())- 1, save);
             }
-            if (choice.equals("w") && missingPoint >= JSON.getJson().widthReader(Variables.getFile())&& missingPoint % JSON.getJson().widthReader(Variables.getFile()) != JSON.getJson().widthReader(Variables.getFile())- 1) {
+            if (choice.equals("w") && missingPoint >= JSON.getJson().widthReader( Variables.variable.getFile())&& missingPoint % JSON.getJson().widthReader( Variables.variable.getFile()) != JSON.getJson().widthReader( Variables.variable.getFile())- 1) {
                 save = list.get(missingPoint);
-                list.set(missingPoint, list.get(missingPoint - JSON.getJson().widthReader(Variables.getFile()) + 1));
-                list.set(missingPoint - JSON.getJson().widthReader(Variables.getFile()) + 1, save);
+                list.set(missingPoint, list.get(missingPoint - JSON.getJson().widthReader( Variables.variable.getFile()) + 1));
+                list.set(missingPoint - JSON.getJson().widthReader( Variables.variable.getFile()) + 1, save);
             }
-            if (choice.equals("s") && missingPoint < JSON.getJson().widthReader(Variables.getFile()) * (JSON.json.heightReader(Variables.getFile()) - 1) && missingPoint % JSON.getJson().widthReader(Variables.getFile()) != JSON.getJson().widthReader(Variables.getFile()) - 1) {
+            if (choice.equals("s") && missingPoint < JSON.getJson().widthReader( Variables.variable.getFile()) * (JSON.json.heightReader( Variables.variable.getFile()) - 1) && missingPoint % JSON.getJson().widthReader( Variables.variable.getFile()) != JSON.getJson().widthReader( Variables.variable.getFile()) - 1) {
                 save = list.get(missingPoint);
-                list.set(missingPoint, list.get(missingPoint + JSON.getJson().widthReader(Variables.getFile()) + 1));
-                list.set(missingPoint + JSON.getJson().widthReader(Variables.getFile()) + 1, save);
+                list.set(missingPoint, list.get(missingPoint + JSON.getJson().widthReader( Variables.variable.getFile()) + 1));
+                list.set(missingPoint + JSON.getJson().widthReader( Variables.variable.getFile()) + 1, save);
             }
-            if (choice.equals("a") & missingPoint < JSON.getJson().widthReader(Variables.getFile()) * (JSON.json.heightReader(Variables.getFile()) - 1) && missingPoint % JSON.getJson().widthReader(Variables.getFile())!= 0) {
+            if (choice.equals("a") & missingPoint < JSON.getJson().widthReader( Variables.variable.getFile()) * (JSON.json.heightReader( Variables.variable.getFile()) - 1) && missingPoint % JSON.getJson().widthReader( Variables.variable.getFile())!= 0) {
                 save = list.get(missingPoint);
-                list.set(missingPoint, list.get(missingPoint + JSON.getJson().widthReader(Variables.getFile()) - 1));
-                list.set(missingPoint + JSON.getJson().widthReader(Variables.getFile())- 1, save);
+                list.set(missingPoint, list.get(missingPoint + JSON.getJson().widthReader( Variables.variable.getFile()) - 1));
+                list.set(missingPoint + JSON.getJson().widthReader( Variables.variable.getFile())- 1, save);
             }
         }
     }
